@@ -36,6 +36,8 @@
 [core]
 	editor = vim
 	excludesfile = ~/.gitignore
+	autocrlf = true
+	whitespace = cr-at-eol
 [color]
 	ui = always
 	pager = true
