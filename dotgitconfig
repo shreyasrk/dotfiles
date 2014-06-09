@@ -31,6 +31,7 @@
 	credits = shortlog -sn --no-merges
 	changelog = log --pretty=oneline --abbrev-commit --graph
 	goback = reset --hard
+	remotes = remote -v
 [blame]
 	date=short
 [core]
