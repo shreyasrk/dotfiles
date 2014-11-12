@@ -6,7 +6,6 @@
 [alias]
 	st = status
 	co = checkout
-	conew = checkout -b
 	ci = commit
 	ciamd = commit --amend
 	br = branch
@@ -18,11 +17,10 @@
 	ld = log --pretty=format:"%C(yellow)%h\\ %C(green)%ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short --graph
 	ls = log --pretty=format:"%C(green)%h\\ %C(yellow)[%ad]%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
 	pur = pull --rebase
-	ponew = push -u origin
 	pobr = push origin
 	goback = reset --hard
 	sync = pull zeomega
-	cpick = cherr-pick
+	cpick = cherry-pick
 	what = whatchanged -p
    	df = diff --color-words
 	di = diff --ignore-space-change
@@ -32,12 +30,13 @@
 	changelog = log --pretty=oneline --abbrev-commit --graph
 	goback = reset --hard
 	remotes = remote -v
+	rename = branch -m 
+	addtostage = add -u 
 [blame]
 	date=short
 [core]
 	editor = vim
 	excludesfile = ~/.gitignore
-	whitespace = cr-at-eol
 [color]
 	ui = always
 	pager = true
@@ -51,3 +50,5 @@
 	insteadOf = gh:
 [url "git@github.com:shreyasrk/"]
 	insteadOf = shreyasrk:
+[url "git@github.com:zeomega/"]
+	insteadOf = zeomega:
