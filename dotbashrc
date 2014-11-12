@@ -91,6 +91,7 @@ alias gl='git log'
 alias gll='git ll'
 alias glg='git lg'
 alias ggui='gitk --all'
+alias gremote='git remotes'
 
 # JIVA related automation
 # =======================
