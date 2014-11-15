@@ -16,6 +16,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 
 " Load respective plugins for language
 autocmd FileType python map <buffer> <F3> :call Flake8()<CR>
+autocmd FileType javascript map <buffer> <F4> :JSHint<CR>
 
 " Vim configuration
 set number
