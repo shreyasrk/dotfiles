@@ -6,7 +6,7 @@ export PS1="\t \[\e[01;33m\]\w\[\e[01;31m\]\$(__git_ps1)\[\e[01;32m\]\$ \[\e[0m\
 alias la='ls -al'
 alias lf='ls -CFlh'
 alias laf='ls -alF'
-alias lah='la -alh'
+alias lah='ls -alh'
 
 # alias diskspace usage
 alias diskspace="du -S | sort -n -r |more"
@@ -92,6 +92,7 @@ alias gll='git ll'
 alias glg='git lg'
 alias ggui='gitk --all'
 alias gremote='git remotes'
+alias gclone='git clone'
 
 # JIVA related automation
 # =======================
