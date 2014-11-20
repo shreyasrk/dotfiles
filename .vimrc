@@ -2,23 +2,26 @@
 filetype off
 
 " Extend via plugins
+" 
+" NerdTree, vim-flake8, vim-javascript-syntax, 
+" jshint, vim-fugitive
 call pathogen#infect()
 call pathogen#helptags()
 
 filetype indent plugin on
 syntax on
 
-" Start NerdTree
-let NERDTreeDirArrows=0
-map <C-n> :NERDTreeToggle<CR>
+" Plugins to fire for Folder Structure within VIM
 autocmd vimenter * NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+map <C-n> :NERDTreeToggle<CR>
 
-" Load respective plugins for language
-autocmd FileType python map <buffer> <F3> :call Flake8()<CR>
+" Plugins to fire for respective languages
 autocmd FileType javascript map <buffer> <F4> :JSHint<CR>
+autocmd FileType python map <buffer> <F3> :call Flake8()<CR>  
 
-" Vim configuration
-set number
+" Vim settings
+set nofoldenable
 set background=dark
 set backspace=2
+set number

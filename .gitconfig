@@ -1,0 +1,53 @@
+[user]
+	name = Shreyas
+	email = rshreyas@zeomega.com
+[apply]
+	whitespace = warn
+[alias]
+	addtostage = add -u 
+	br = branch
+	changelog = log --pretty=oneline --abbrev-commit --graph
+	ci = commit
+	ciamd = commit --amend
+	co = checkout
+	cpick = cherry-pick
+	credits = shortlog -sn --no-merges
+   	df = diff --color-words
+	di = diff --ignore-space-change
+	goback = reset --hard
+	ld = log --pretty=format:"%C(yellow)%h\\ %C(green)%ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short --graph
+	lg = log --graph --date=short --date-order
+	ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+	ls = log --pretty=format:"%C(green)%h\\ %C(yellow)[%ad]%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
+	lt = log --graph --date=short --topo-order
+	pick = add -p
+	pul = pull --verbose
+	pur = pull --rebase
+	po = push origin
+	remotes = remote -v
+	rename = branch -m 
+    st = status
+    staged = diff --cached	
+	sync = pull zeomega
+	unstage = reset HEAD
+	what = whatchanged -p
+[blame]
+	date=short
+[core]
+	editor = vim
+	excludesfile = ~/.gitignore
+[color]
+	ui = always
+	pager = true
+[color "status"]
+	untracked = yellow
+	changed = red
+	added = green
+[format]
+	pretty="%Cgreen%h %Cred%ar(%ad) %Cblue<%an> %C(yellow)%d %Creset%s"
+[url "git@github.com:"]
+	insteadOf = gh:
+[url "git@github.com:shreyasrk/"]
+	insteadOf = shreyasrk:
+[url "git@github.com:zeomega/"]
+	insteadOf = zeomega:

@@ -70,29 +70,32 @@ netinfo ()
 }
 
 # Git Command Aliasing
-alias gst='git st'
 alias ga='git add'
 alias gau='git add -u'
-alias gc='git commit'
-alias gca='git commit -a'
-alias gdf='git df'
-alias gb='git br'
-alias gba='git br -a'
+alias gbr='git br'
+alias gbrall='git br -a'
+alias gcherryp='git cherry-pick'
+alias gclone='git clone'
 alias gco='git co'
 alias gcob='git co -b'
-alias gpo='git push origin'
-alias gsync='git sync'
-alias gcp='git cherry-pick'
-alias gr='git rebase'
-alias gri='git rebase --interactive'
-alias grm='git rm'
-alias greset='git reset HEAD'
-alias gl='git log'
-alias gll='git ll'
-alias glg='git lg'
+alias gcommit='git commit'
+alias gcommita='git commit -a'
+alias gdf='git df'
+alias gfetch='git fetch --all'
 alias ggui='gitk --all'
+alias gl='git log'
+alias glg='git lg'
+alias gll='git ll'
+alias gpullo='git pull origin'
+alias gpusho='git push origin'
+alias grebase='git rebase'
+alias grebasei='git rebase --interactive'
 alias gremote='git remotes'
-alias gclone='git clone'
+alias greset='git reset HEAD'
+alias grm='git rm'
+alias gst='git st'
+alias gstash='git stash'
+alias gsync='git sync'
 
 # JIVA related automation
 # =======================
@@ -115,7 +118,7 @@ alias rzeop='./bin/zeo_srv start'
 alias rzp='./bin/zope_c1 fg'
 
 # Run the entire setup (5.7)
-startzope57() {
+startzope() {
     echo "pwd: $1"
     cd $1 ;
     source ./bin/mssql_odbc.sh ;
@@ -126,7 +129,22 @@ startzope57() {
     echo "##### Executed : ./bin/memcached_svc start #####"
     rmongo ;
     echo "##### Executed : ./bin/mongodb_svc start #####"
-    echo "##### Running : ./bin/zope_c1 fg"
+    echo "##### Running : ./bin/zope_c1 fg #####"
+    rzp ;
+}
+
+startzopeold() {
+    echo "pwd: $1"
+    cd $1 ;
+    source ./bin/mssql_odbc.sh ;
+    echo "##### Executed ./bin/mssql_odbc.sh #####"
+    rzeop ;
+    echo "##### Executed ./bin/zeo_srv start #####"
+    rmcp ;
+    echo "##### Executed ./bin/memcached_startcluster.sh #####"
+    rmongop ;
+    echo "##### Executed ./bin/start_mongodb_master.sh #####"
+    echo "##### Running ./bin/zope_c1 fg #####"
     rzp ;
 }
 
@@ -146,10 +164,11 @@ killzope() {
 }
 
 # Unlock the mongodb
+# $1 must point to the base jiva_buildout directory!
 mongounlock() {
     rm -rf $1/var/mongodb/data/* ;
     rm -rf $1/var/mongodb/mongodb.pid ;
-    echo "Mongo Unlocked ... " 
+    echo "Mongo Unlocked ... "
 }
 
 # Remote Server Login
