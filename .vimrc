@@ -1,10 +1,6 @@
 " Pathogen load
 filetype off
 
-" Extend via plugins
-" 
-" NerdTree, vim-flake8, vim-javascript-syntax, 
-" jshint, vim-fugitive
 call pathogen#infect()
 call pathogen#helptags()
 
