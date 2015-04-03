@@ -4,13 +4,8 @@
 [apply]
 	whitespace = warn
 [alias]
-	addtostage = add -u 
-	br = branch
 	changelog = log --pretty=oneline --abbrev-commit --graph
-	ci = commit
 	ciamd = commit --amend
-	co = checkout
-	cpick = cherry-pick
 	credits = shortlog -sn --no-merges
    	df = diff --color-words
 	di = diff --ignore-space-change
@@ -24,9 +19,7 @@
 	pul = pull --verbose
 	pur = pull --rebase
 	po = push origin
-	remotes = remote -v
 	rename = branch -m 
-    	st = status
    	staged = diff --cached	
 	sync = pull zeomega
 	unstage = reset HEAD
