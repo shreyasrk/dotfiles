@@ -1,6 +1,11 @@
 # Enable git branch information
+# If this file is not present or if you face `__git_ps1 () not found` Error,
+# overwrite git_completion.sh to /etc/bash_completion.d/git
 . /etc/bash_completion.d/git
 export PS1="\t \[\e[01;33m\]\w\[\e[01;31m\]\$(__git_ps1)\[\e[01;32m\]\$ \[\e[0m\]"
+
+# Adding JIVA Related Information
+. ~/.bashrc_jiva
 
 # Listing files and folders
 alias la='ls -al'
@@ -98,79 +103,4 @@ alias gstash='git stash'
 alias gsync='git sync'
 alias grename='git rename'
 
-# JIVA related automation
-# =======================
-# Aliases for newer versions
-alias rbo='./usr/bin/buildout -c linux_dev.cfg'
-alias rmongo='./bin/mongodb_svc start'
-alias rmc='./bin/memcached_svc start'
-alias rzeo='./bin/zeo_svc start'
-alias szeo='./bin/zeo_svc stop'
-alias smongo='./bin/mongodb_svc stop'
-alias smc='./bin/memcached_svc stop'
-
-# Aliases for older versions
-alias rbop='./bin/buildout -c linux_dev.cfg'
-alias rmongop='./bin/start_mongodb_master.sh'
-alias rmcp='./bin/memcached_startcluster.sh'
-alias rzeop='./bin/zeo_srv start'
-
-# Alias for Running zope
-alias rzp='./bin/zope_c1 fg'
-
-# Run the entire setup (5.7)
-startzope() {
-    echo "pwd: $1"
-    cd $1 ;
-    source ./bin/mssql_odbc.sh ;
-    echo "##### Executed : ./bin/mssql_odbc.sh #####"
-    rzeo ;
-    echo "##### Executed : ./bin/zeo_svc start #####"
-    rmc ;
-    echo "##### Executed : ./bin/memcached_svc start #####"
-    rmongo ;
-    echo "##### Executed : ./bin/mongodb_svc start #####"
-    echo "##### Running : ./bin/zope_c1 fg #####"
-    rzp ;
-}
-
-startzopeold() {
-    echo "pwd: $1"
-    cd $1 ;
-    source ./bin/mssql_odbc.sh ;
-    echo "##### Executed ./bin/mssql_odbc.sh #####"
-    rzeop ;
-    echo "##### Executed ./bin/zeo_srv start #####"
-    rmcp ;
-    echo "##### Executed ./bin/memcached_startcluster.sh #####"
-    rmongop ;
-    echo "##### Executed ./bin/start_mongodb_master.sh #####"
-    echo "##### Running ./bin/zope_c1 fg #####"
-    rzp ;
-}
-
-# Kill all Zope related processes
-killzope() {
-    pgrep -l "python" ;
-    echo "Killing all python processes ..."
-    pkill "python" ;
-
-    pgrep -l "mongo" ;
-    echo "Killing all mongodb processes ..."
-    pkill "mongo" ;
-
-    pgrep -l "memca" ;
-    echo "Killing all memcache processes ..."
-    pkill "memca" ;
-}
-
-# Unlock the mongodb
-# $1 must point to the base jiva_buildout directory!
-mongounlock() {
-    rm -rf $1/var/mongodb/data/* ;
-    rm -rf $1/var/mongodb/mongodb.pid ;
-    echo "Mongo Unlocked ... "
-    rmongo ;
-    echo "Mongo Restarted ...."
-}
 
