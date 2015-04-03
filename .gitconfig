@@ -1,6 +1,6 @@
 [user]
 	name = Shreyas
-	email = rshreyas@zeomega.com
+	email = shrykulk.rk85@gmail.com
 [apply]
 	whitespace = warn
 [alias]
@@ -26,8 +26,8 @@
 	po = push origin
 	remotes = remote -v
 	rename = branch -m 
-    st = status
-    staged = diff --cached	
+    	st = status
+   	staged = diff --cached	
 	sync = pull zeomega
 	unstage = reset HEAD
 	what = whatchanged -p
