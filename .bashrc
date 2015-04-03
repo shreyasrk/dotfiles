@@ -99,7 +99,7 @@ alias gsync='git sync'
 
 # JIVA related automation
 # =======================
-# Aliases for 5.6.1 and upward
+# Aliases for newer versions
 alias rbo='./usr/bin/buildout -c linux_dev.cfg'
 alias rmongo='./bin/mongodb_svc start'
 alias rmc='./bin/memcached_svc start'
@@ -108,7 +108,7 @@ alias szeo='./bin/zeo_svc stop'
 alias smongo='./bin/mongodb_svc stop'
 alias smc='./bin/memcached_svc stop'
 
-# Aliases for 5.6 and below
+# Aliases for older versions
 alias rbop='./bin/buildout -c linux_dev.cfg'
 alias rmongop='./bin/start_mongodb_master.sh'
 alias rmcp='./bin/memcached_startcluster.sh'
@@ -171,7 +171,3 @@ mongounlock() {
     echo "Mongo Unlocked ... "
 }
 
-# Remote Server Login
-alias 11.4='rdesktop 192.168.11.4 -u rshreyas -d PALYAM -g "90%" &'
-alias 4.4='rdesktop 192.168.4.4 -u rshreyas -d PALYAM -g "90%" &'
-alias 11.61='rdesktop 192.168.11.61 -u rshreyas -d PALYAM -g "90%" &'
