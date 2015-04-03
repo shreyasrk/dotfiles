@@ -33,6 +33,8 @@
 	what = whatchanged -p
 [blame]
 	date=short
+[branch]
+	autosetuprebase = always
 [core]
 	editor = vim
 	excludesfile = ~/.gitignore

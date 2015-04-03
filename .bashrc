@@ -7,6 +7,7 @@ alias la='ls -al'
 alias lf='ls -CFlh'
 alias laf='ls -alF'
 alias lah='ls -alh'
+alias ll='ls -l'
 
 # alias diskspace usage
 alias diskspace="du -S | sort -n -r |more"
@@ -169,5 +170,7 @@ mongounlock() {
     rm -rf $1/var/mongodb/data/* ;
     rm -rf $1/var/mongodb/mongodb.pid ;
     echo "Mongo Unlocked ... "
+    rmongo ;
+    echo "Mongo Restarted ...."
 }
 
