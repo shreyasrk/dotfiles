@@ -54,4 +54,6 @@ docs/_build/
 # Javascript related files and packages
 node_modules/
 coverage/
+tests/vendor/
+dist/
 test-results.xml
