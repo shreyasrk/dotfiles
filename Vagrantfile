@@ -22,8 +22,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define "centos6" do |centos6|
       centos6.vm.box = "puppetlabs/centos-6.6-32-nocm"
       centos6.vm.network "private_network", ip: "192.168.33.20"
+      centos6.vm.network "forwarded_port", guest: 8080, host: 6500
       centos6.vm.provision "shell", inline: "sudo yum install jenkins"
-      centos6.vm.provision "shell", inline: "sudo yum install dvtm"
+      centos6.vm.provision "shell", inline: "sudo service iptables stop"
   end
 
   config.vm.define "trusty32" do |trusty32|
