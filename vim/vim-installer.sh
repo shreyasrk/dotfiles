@@ -11,4 +11,4 @@ git clone https://github.com/walm/jshint.vim.git ~/.vim/bundle/jshint/
 git clone https://github.com/tpope/vim-fugitive.git ~/.vim/bundle/vim-fugitive/
 
 # Copy the required .vimrc file
-curl -LSSo ~/.vimrc https://raw.githubusercontent.com/shreyasrk/dotfiles/master/.vim/vimrc
+curl -LSSo ~/.vimrc https://raw.githubusercontent.com/shreyasrk/dotfiles/master/vim/.vimrc
