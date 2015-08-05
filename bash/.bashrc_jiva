@@ -1,7 +1,8 @@
 # JIVA related automation
-# =======================
-# Aliases for newer versions
 alias rbo='./usr/bin/buildout -c linux_dev.cfg'
+alias pytestbo='./usr/bin/buildout -c linux_dev_pytest.cfg'
+
+# Aliases for server commands
 alias rmongo='./bin/mongodb_svc start'
 alias rmc='./bin/memcached_svc start'
 alias rzeo='./bin/zeo_svc start'
@@ -9,16 +10,13 @@ alias szeo='./bin/zeo_svc stop'
 alias smongo='./bin/mongodb_svc stop'
 alias smc='./bin/memcached_svc stop'
 
-# Aliases for older versions
-alias rbop='./bin/buildout -c linux_dev.cfg'
-alias rmongop='./bin/start_mongodb_master.sh'
-alias rmcp='./bin/memcached_startcluster.sh'
-alias rzeop='./bin/zeo_srv start'
+# Aliases for pytest commands
+alias pytest='./bin/py.test -vvv'
 
 # Alias for Running zope
 alias rzp='./bin/zope_c1 fg'
 
-# Run the entire setup (5.7)
+# Run Server
 startzope() {
     echo "pwd: $1"
     cd $1 ;
@@ -34,19 +32,29 @@ startzope() {
     rzp ;
 }
 
-startzopeold() {
+# pytest setup
+# $1: pytest instance jiva_buildout directory (Mandatory)
+# $2: repo/path/test.py which will be used to run tests (Mandatory)
+# $3: method_to_be_tested (Optional)
+runpytest() {
     echo "pwd: $1"
     cd $1 ;
+    export CLIENT_HOME=$1/parts/zope_c1 ;
+    export INSTANCE_HOME=$1/parts/zope_c1 ;
+    echo "##### Exported pytest environment variables #####"
     source ./bin/mssql_odbc.sh ;
-    echo "##### Executed ./bin/mssql_odbc.sh #####"
-    rzeop ;
-    echo "##### Executed ./bin/zeo_srv start #####"
-    rmcp ;
-    echo "##### Executed ./bin/memcached_startcluster.sh #####"
-    rmongop ;
-    echo "##### Executed ./bin/start_mongodb_master.sh #####"
-    echo "##### Running ./bin/zope_c1 fg #####"
-    rzp ;
+    echo "##### Executed: ./bin/mssql_odbc.sh #####"
+    rzeo ;
+    echo "##### Executed: ./bin/zeo_svc start #####"
+    rmongo ;
+    echo "##### Executed : ./bin/mongodb_svc start #####"
+    echo "##### Running: ./bin/py.test"
+    if [ ! -z $3 ]
+    then
+        pytest $2 -k $3
+    else
+        pytest $2
+    fi
 }
 
 # Kill all Zope related processes
@@ -70,6 +78,13 @@ mongounlock() {
     rm -rf $1/var/mongodb/data/* ;
     rm -rf $1/var/mongodb/mongodb.pid ;
     echo "Mongo Unlocked ... "
-    rmongo ;
-    echo "Mongo Restarted ...."
+    # rmongo ;
+    # echo "Mongo Restarted ...."
+}
+
+# pep8 command to run for the file
+# $1 MUST point to the repo in /src directory under jiva_buildout!
+runpep8() {
+    echo "Running pep8 for $1" ;
+    ../../bin/pep8 --max-line-length=120 $1
 }
