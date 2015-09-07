@@ -28,7 +28,7 @@ def remove_duplicates():
                 re.match(valid_dir, f)]
         for dir in dup_dirs:
             print "Removing ", dir
-            # shutil.rmtree(eggs_path + dir)
+            shutil.rmtree(eggs_path + dir)
 
 if __name__ == '__main__':
     remove_duplicates()
