@@ -1,36 +1,63 @@
 #!/usr/bin/python
+"""
+    Script to remove unused eggs in /jiva_buildout/eggs
+    Parses jiva_app_versions.cfg and linux_versions.cfg
+"""
+
+__author__ = 'Avinash Yenikapati'
 
 import os
-import re
+import platform
 import shutil
+from ConfigParser import SafeConfigParser
 
-def parse_cfg_file():
-    egg_list = []
-    repo_list = []
-    cfg = open(os.getcwd() + '/etc/jiva_app_versions.cfg', 'r')
+parser = SafeConfigParser()
 
-    for i, line in enumerate(cfg):
-        if i >= 4:
-            if not line.startswith('#'):
-                egg_list.append("-".join(line.replace("\n", "").strip().split(' = ')) + '-py2.7.egg')
-                repo_list.append(line.replace("\n", "").split(' = ')[0])
+eggs_path = os.path.join(os.getcwd(), 'eggs')
+all_eggs = os.listdir(eggs_path)
 
-    return egg_list, repo_list
+def get_app_versions():
+    etc_path = os.path.join(os.getcwd(), 'etc')
+    app_versions_path = os.path.join(etc_path, 'jiva_app_versions.cfg')
+    cfg_versions = get_cfg_versions(app_versions_path)
+    return cfg_versions
 
-def remove_duplicates():
-    eggs_path = os.getcwd() + '/eggs/'
-    eggs_dir = os.listdir(eggs_path)
-    eggs_list, repo_list = parse_cfg_file()
+def get_cfg_versions(path):  
+    parser.read(path)
+    repo_list = parser.options('versions')
+    cfg_versions = {repo: parser.get('versions', repo) for repo in repo_list}
+    return cfg_versions
 
-    for repo in repo_list:
-        valid_dir = [f for f in eggs_list if re.match(repo, f)][0]
-        dup_dirs = [f for f in eggs_dir if re.match(repo + '-', f) and not
-                re.match(valid_dir, f)]
-        for dir in dup_dirs:
-            print "Removing ", dir
-            shutil.rmtree(eggs_path + dir)
+def check_duplicates(cfg_versions):
+    actual_versions = {}
+    for egg in all_eggs:
+        actual_versions.setdefault(egg.split('-')[0], []).append(egg)
+    dup_dirs_list = [egg for repo, versions in cfg_versions.iteritems() for egg in actual_versions.get(repo, []) if '-' + versions + '-' not in egg]
+    return dup_dirs_list
 
+def get_os_versions():
+    modules_path = os.path.join(os.getcwd(), 'modules')
+    build_path = os.path.join(modules_path, 'zope_build')
+    files_path = os.path.join(build_path, 'files')
+    os_versions_path = os.path.join(files_path, platform.system().lower() + '_versions.cfg')
+    cfg_versions = get_cfg_versions(os_versions_path)
+    return cfg_versions
+
+def remove_folders(cfg_versions):
+    dup_dirs = check_duplicates(cfg_versions)
+    for directory in dup_dirs:
+        folder_path = os.path.join(eggs_path, directory)
+        if os.path.exists(folder_path):
+            print "Removing ", folder_path
+            shutil.rmtree(folder_path)
+
+    print "Task completed. Don't forget to run buildout again to sync latest eggs!"
+    
 if __name__ == '__main__':
-    remove_duplicates()
+    app_cfg_dict = get_app_versions()
+    remove_folders(app_cfg_dict)
+    
+    os_cfg_dict = get_os_versions()
+    remove_folders(os_cfg_dict)
 
 
