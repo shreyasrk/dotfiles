@@ -84,7 +84,9 @@ mongounlock() {
 
 # pep8 command to run for the file
 # $1 MUST point to the repo in /src directory under jiva_buildout!
-runpep8() {
+pystandards() {
+    echo "Running pyflakes for $1" ;
+    ../../bin/pyflakes $1
     echo "Running pep8 for $1" ;
     ../../bin/pep8 --max-line-length=120 $1
 }
