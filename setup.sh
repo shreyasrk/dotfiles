@@ -8,7 +8,6 @@ cp .gitconfig ~/.gitconfig
 
 # Move all .bash config
 cp bash/.bashrc ~/.bashrc
-cp bash/bashrc_jiva ~/.bashrc_jiva
 
 # Setup Vim tools
 ./vim/vim-installer.sh
