@@ -14,22 +14,23 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   
   # Configuring other OS machines
   config.vm.define "default" do |default|
-      default.vm.box = "hashicorp/precise32"
+      default.vm.box = "hashicorp/precise64"
       default.vm.network "private_network", ip: "192.168.33.10"
       default.vm.provision "shell", inline: "sudo apt-get install git vim dvtm"
   end
 
   config.vm.define "centos6" do |centos6|
-      centos6.vm.box = "puppetlabs/centos-6.6-32-nocm"
+      centos6.vm.box = "box-cutter/centos67"
       centos6.vm.network "private_network", ip: "192.168.33.20"
       centos6.vm.network "forwarded_port", guest: 8080, host: 6500
-      centos6.vm.provision "shell", inline: "sudo yum install jenkins"
+      centos6.vm.provision "shell", inline: "sudo yum install java"
       centos6.vm.provision "shell", inline: "sudo service iptables stop"
   end
 
-  config.vm.define "trusty32" do |trusty32|
-      trusty32.vm.box = "ubuntu/trusty32"
-      trusty32.vm.network "private_network", ip: "192.168.33.30"
+  config.vm.define "trusty64" do |trusty64|
+      trusty64.vm.box = "ubuntu/trusty64"
+      trusty64.vm.network "private_network", ip: "192.168.33.30"
+      trusty64.vm.network "forwarded_port", guest: 3306, host: 3306
   end
 
   # Disable automatic box update checking. If you disable this, then
