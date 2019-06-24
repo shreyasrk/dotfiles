@@ -1,23 +1,106 @@
-" Pathogen load
-filetype off
+set nobackup
+set nowb
+set noswapfile
+set noerrorbells
 
-call pathogen#infect()
-call pathogen#helptags()
+set mouse=a
+set ttymouse=xterm2
+set so=999
+set clipboard=unnamedplus
+set wildmenu
 
-filetype indent plugin on
-syntax on
+if has('mac')
+    set clipboard=unnamed
+endif
 
-" Plugins to fire for Folder Structure within VIM
-autocmd vimenter * NERDTree
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-map <C-n> :NERDTreeToggle<CR>
+" Appearance "
 
-" Plugins to fire for respective languages
-autocmd FileType javascript map <buffer> <F4> :JSHint<CR>
-autocmd FileType python map <buffer> <F3> :call Flake8()<CR>  
+syntax enable
 
-" Vim settings
-set nofoldenable
-set background=dark
-set backspace=2
 set number
+set relativenumber
+set linespace=12
+
+set title
+set titlestring=%F\ -\ vim
+set noshowmode
+set laststatus=2
+
+set background=dark
+
+" File behaviour "
+
+set expandtab
+set smarttab
+set linebreak
+set breakindent
+set nostartofline
+
+set shiftwidth=4
+set tabstop=4
+
+" Search "
+
+set smartcase
+set hlsearch
+set incsearch
+
+" Panes "
+
+set splitbelow
+set splitright
+
+" Filetype associations "
+
+au BufNewFile,BufRead *.fish set ft=fish
+
+" Bindings "
+
+set backspace=indent,eol,start
+
+map q <Nop>
+map ; :Files<CR>
+
+map <F6> :setlocal spell!<CR>
+map <F12> :Goyo<CR>
+map <C-o> :NERDTreeToggle<CR>
+
+map <Leader> <Plug>(easymotion-prefix)
+
+" Plugins "
+
+" Install and run vim-plug on first run
+if empty(glob('~/.vim/autoload/plug.vim'))
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+so ~/.vim/plugins.vim
+
+let g:gruvbox_vert_split = 'bg1'
+let g:gruvbox_sign_column = 'bg0'
+
+colorscheme gruvbox
+hi Normal ctermbg=NONE
+hi CursorLineNr ctermfg=white
+hi SignColumn ctermbg=NONE
+
+highlight GitGutterAdd ctermfg=green ctermbg=NONE
+highlight GitGutterChange ctermfg=yellow ctermbg=NONE
+highlight GitGutterDelete ctermfg=red ctermbg=NONE
+highlight GitGutterChangeDelete ctermfg=yellow ctermbg=NONE
+
+let g:lightline = {
+  \     'active': {
+  \         'left': [['mode', 'paste' ], ['readonly', 'filename', 'modified']],
+  \         'right': [['lineinfo'], ['percent'], ['gitbranch', 'fileformat', 'fileencoding']]
+  \     },
+  \     'component_function': {
+  \         'gitbranch': 'gitbranch#name'
+  \     }
+  \ }
+
+let g:javascript_plugin_flow = 1
+let NERDTreeShowHidden = 1
+
