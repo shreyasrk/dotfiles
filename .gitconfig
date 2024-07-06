@@ -1,9 +1,9 @@
 [user]
-	name = Shreyas
-	email = shrykulk.rk85@gmail.com
+    name = Shreyas
 [apply]
 	whitespace = warn
 [alias]
+    st = status
 	changelog = log --pretty=oneline --abbrev-commit --graph
 	ciamd = commit --amend
 	credits = shortlog -sn --no-merges
@@ -21,7 +21,6 @@
 	po = push origin
 	rename = branch -m 
    	staged = diff --cached	
-	sync = pull zeomega
 	unstage = reset HEAD
 	what = whatchanged -p
 [blame]
@@ -30,7 +29,9 @@
 	autosetuprebase = always
 [core]
 	editor = vim
-	excludesfile = ~/.gitignore
+    excludesfile = ~/.gitignore
+    autocrlf = false
+    pager = less -R
 [color]
 	ui = always
 	pager = true
@@ -40,9 +41,3 @@
 	added = green
 [format]
 	pretty="%Cgreen%h %Cred%ar(%ad) %Cblue<%an> %C(yellow)%d %Creset%s"
-[url "git@github.com:"]
-	insteadOf = gh:
-[url "git@github.com:shreyasrk/"]
-	insteadOf = shreyasrk:
-[url "git@github.com:zeomega/"]
-	insteadOf = zeomega:
