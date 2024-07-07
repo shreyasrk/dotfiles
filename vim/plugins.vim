@@ -6,7 +6,8 @@
 " Syntax - Plug '<github-user>/<github-repo>'
 "
 " For more plugins - https://vimawesome.com
-call plug#begin('~/.vim/plugged')
+" This folder must be available - else vim will create it and maintain
+call plug#begin('~/.vim_runtime/my_plugins/plugged')
 
 " The Git gutter - shows git diff within the file in real-time
 Plug 'airblade/vim-gitgutter'

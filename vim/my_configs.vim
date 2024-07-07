@@ -1,3 +1,13 @@
+" Install and run vim-plug on first run - This still rocks!
+if empty(glob('~/.vim_runtime/autoload/plug.vim'))
+    silent !curl -fLo ~/.vim_runtime/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+" Now load the plugins - vim-plug will take care of management
+so ~/.vim_runtime/my_plugins/plugins.vim
+
 " See Nerdtree docs - https://github.com/preservim/nerdtree/blob/master/README.markdown
 " Start NERDTree and leave the cursor in it.
 autocmd VimEnter * NERDTree
@@ -17,11 +27,6 @@ nnoremap <C-f> :NERDTreeFind<CR>
 let NERDTreeShowHidden=1
 
 " Vim UI settings
-set nobackup
-set nowb
-set noswapfile
-set noerrorbells
-
 set mouse=a
 set ttymouse=xterm2
 set so=999
@@ -33,8 +38,6 @@ if has('mac')
 endif
 
 " Appearance "
-
-syntax enable
 
 set number
 set relativenumber
@@ -49,8 +52,6 @@ set background=dark
 
 " File behaviour "
 
-set expandtab
-set smarttab
 set linebreak
 set breakindent
 set nostartofline
