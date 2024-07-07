@@ -15,8 +15,14 @@ chmod +x setup.sh
 ./setup.sh # Ensure you have bash installed and can access github.com (check proxies/firewall settings if necessary)
 ```
 
-That's it! Feel free to raise PR in case you find anything missing (or better ones!)
+That's it! Feel free to raise PR in case you want to contribute (or better ones!)
 
 ### Note
 
-This repo will undergo changes, albeit no-so-frequently - please raise a PR for me to get an email to review it!
+This repo will undergo changes, albeit no-so-frequently - please raise a PR for me to get a notofication!
+
+### References
+
+* [.vimrc key map](https://github.com/amix/vimrc?tab=readme-ov-file#key-mappings)
+* [tmux.conf key map](https://github.com/gpakosz/.tmux?tab=readme-ov-file#bindings)
+* [.,bashrc](https://gist.github.com/zachbrowne/8bc414c9f30192067831fafebd14255c)
