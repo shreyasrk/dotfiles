@@ -15,6 +15,17 @@ chmod +x setup.sh
 ./setup.sh # Ensure you have bash installed and can access github.com (check proxies/firewall settings if necessary)
 ```
 
+### Linux Distro additional setup
+
+While running `setup.sh` and using bash/tmux/vim - you may encounter newline issues. Clean these files using `sed` command
+```
+sed -i -e 's/\r$//' *.sh
+sed -i -e 's/\r$//' vim/*.*
+sed -i -e 's/\r$//' *.*
+
+sed -i 's\/r//' *.*
+```
+
 That's it! Feel free to raise PR in case you want to contribute (or better ones!)
 
 ### Note
