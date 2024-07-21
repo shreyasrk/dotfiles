@@ -1,4 +1,11 @@
-# My ZSH Plugins - run setup_zsh.sh first and source this into .zshrc
+ZSH_THEME="agnoster"
+
+ZSH_THEME_RANDOM_CANDIDATES=(
+    "robbyrussell"
+    "agnoster"
+)
+
+# My ZSH Plugins - run setup_zsh.sh first
 plugins=(
     git
     vundle
