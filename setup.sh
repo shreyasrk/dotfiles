@@ -13,7 +13,7 @@ cp .gitconfig ~/.gitconfig
 echo "Git configuration Complete!"
 
 install_oh_my_bash () {
-    mv $(pwd)/bash/
+    cd $(pwd)/bash/
     ./setup-bash.sh
 }
 
@@ -24,9 +24,7 @@ install_ultimate_badass_bashrc () {
 
 install_bash () {
     # echo "Installing Bash Config..."
-
     install_ultimate_badass_bashrc
-
     # echo "Bash Configuration Complete!"
 }
 
@@ -42,11 +40,10 @@ install_vim () {
 install_tmux () {
     echo "Setting up tmux..."
 
-    cd ~
-    if cd .tmux; then
+    if cd ~/.tmux; then
         git pull;
     else
-        git clone https://github.com/gpakosz/.tmux.git
+        git clone https://github.com/gpakosz/.tmux.git ~/.tmux
     fi
 
     ln -s -f ~/.tmux/.tmux.conf
@@ -56,7 +53,12 @@ install_tmux () {
 }
 
 install_asdf_vm () {
-    git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.14.0
+    if cd ~/.asdf; then
+        git pull;
+    else
+        git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.14.0
+    fi
+
     echo ". ~/.asdf/asdf.sh" >> ~/.bashrc
     echo ". ~/.asdf/completions/asdf.bash" >> ~/.bashrc
 }

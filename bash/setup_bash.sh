@@ -2,6 +2,7 @@
 
 # Install Oh-my-bash
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
+source ~/.bashrc
 
 # Backup the provided .bashrc to suit ours
 mv ~/.bashrc ~/.bashrc.ohmybash.backup
