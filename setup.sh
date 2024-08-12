@@ -40,14 +40,17 @@ install_vim () {
 install_tmux () {
     echo "Setting up tmux..."
 
+    cd
     if cd ~/.tmux; then
+        cd ~/.tmux
         git pull;
+        cd
     else
-        git clone https://github.com/gpakosz/.tmux.git ~/.tmux
+        git clone https://github.com/gpakosz/.tmux.git
     fi
 
     ln -s -f ~/.tmux/.tmux.conf
-    cp ~/.tmux/.tmux.conf.local ~/
+    cp ~/.tmux/.tmux.conf.local .
 
     echo "tmux setup complete!"
 }
@@ -89,7 +92,7 @@ install_flatpak_and_brew () {
     echo "Podman Desktop successfully installed. Run `apt install -y podman`"
 }
 
-install_bash
+# install_bash
 install_vim
 install_tmux
 install_asdf_vm

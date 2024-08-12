@@ -1,17 +1,26 @@
 # Kind Cluster Config
 #
 # We use kind + podman
-# Install using brew - `brew install kind podman podman-compose`
+# Install these via package managers - `podman podman-compose podman-docker` (Installation from source is risky - if you want to take one!)
 #
-# Next is the setup mayhem.
-# some system will prevent running kind on podman, in Debian OS, it is even worse.
-
-# Enable cgroupv2 for OS - https://webuzo.com/docs/how-tos/how-to-enable-cgroups-v2/
+# Installation on specific Linux Distros
+#
+# Enable cgroup:v2 for OS - https://webuzo.com/docs/how-tos/how-to-enable-cgroups-v2/
+# (Optional) Run - `sudo cp containers.conf /etc/containers/` to link the correct CRI `crun`
+#
 # Follow the instructions to setup rootless podman - https://kind.sigs.k8s.io/docs/user/rootless/
-# Next, run - `sudo cp containers.conf /etc/containers/` to link the correct CRI `crun` installed via brew (OS also installs `crun` but is outdated)
-
+#
+# Note - 
+# Debian OS - Recommend to use Kind with Docker - Podman is a pain to install, debug and fix.
+# Arch Linux - Requires some specific stle of running kind - 
+#    Creating cluster via `systemd-run --scope --user kind create cluster`
+#    Enable Rootless explicitly for Podman - https://github.com/containers/podman/blob/main/docs/tutorials/rootless_tutorial.md
+# Ubuntu/Fedora Systems - Follow their installation guides
+# Install Kind - https://kind.sigs.k8s.io/docs/user/quick-start/#installing-from-release-binaries
+#
 # Next, use kind to create clusters. Enjoy!
 # We setup a three node (two workers) cluster config
+#
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 nodes:
