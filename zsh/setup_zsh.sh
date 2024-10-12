@@ -1,21 +1,29 @@
 #!/bin/sh
 
-# Setup oh-my-zsh!
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-mv ~/.zshrc ~/.zshrc.ohmyzsh.backup
-cp .zshrc ~/
-
 # Run brew update first
 brew update --auto-update
 
-# Install asdf
-git clone https://github.com/asdf-vm/asdf.git ~/.asdf
-echo -e "\n. \"$(brew --prefix asdf)/libexec/asdf.sh\"" >> ~/.bashrc
-echo -e "\n. \"$(brew --prefix asdf)/etc/bash_completion.d/asdf.bash\"" >> ~/.bashrc
+# Setup oh-my-zsh!
+install_ohmyzsh () {
+  mv ~/.zshrc ~/.zshrc.ohmyzsh.backup
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  cp .zshrc ~/
+}
 
-# Install autoenv
-brew install 'autoenv'
-printf '%s\n' "source $(brew --prefix autoenv)/activate.sh" >> "${ZDOTDIR:-$HOME}/.zprofile"
+install_utils () {
+  # Install asdf
+  git clone https://github.com/asdf-vm/asdf.git ~/.asdf
+  echo -e "\n. \"$(brew --prefix asdf)/libexec/asdf.sh\"" >> ~/.bashrc
+  echo -e "\n. \"$(brew --prefix asdf)/etc/bash_completion.d/asdf.bash\"" >> ~/.bashrc
 
-# Install ag - the-silver-searcher
-brew install the_silver_searcher
+  # Install autoenv
+  brew install 'autoenv'
+  printf '%s\n' "source $(brew --prefix autoenv)/activate.sh" >> "${ZDOTDIR:-$HOME}/.zprofile"
+
+  # Install ag - the-silver-searcher
+  brew install the_silver_searcher
+}
+
+install_ohmyzsh
+install_utils
+
