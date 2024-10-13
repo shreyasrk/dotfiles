@@ -146,3 +146,6 @@ source "$OSH"/oh-my-bash.sh
 alias docker=podman
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+# Kind settings - to run with systemd --scope user
+alias ki=systemd-run --scope --user -p "Delegate=yes" kind
